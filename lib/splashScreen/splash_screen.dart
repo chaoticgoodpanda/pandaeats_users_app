@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../authentication/auth_screen.dart';
 import '../global/global.dart';
+import '../mainScreens/home_screen.dart';
 
 
 class MySplashScreen extends StatefulWidget {
@@ -21,11 +23,11 @@ class _MySplashScreenState extends State<MySplashScreen> {
       // if user is already logged in
       if(firebaseAuth.currentUser != null) {
         // logged in, push to homepage
-        // Navigator.push(context, MaterialPageRoute(builder: (c) => const HomeScreen()));
+        Navigator.push(context, MaterialPageRoute(builder: (c) => const HomeScreen()));
       }
       else {
         // if not logged in, go to login screen
-        // Navigator.push(context, MaterialPageRoute(builder: (c) => const AuthScreen()));
+        Navigator.push(context, MaterialPageRoute(builder: (c) => const AuthScreen()));
       }
     });
   }
@@ -42,25 +44,34 @@ class _MySplashScreenState extends State<MySplashScreen> {
   Widget build(BuildContext context) {
     return Material(
       child: Container(
-        color: Colors.white,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(colors: [
+            Colors.teal,
+            Colors.purpleAccent,
+          ],
+          begin: FractionalOffset(0.0, 0.0),
+          end: FractionalOffset(1.0, 0.0),
+          stops: [0.0, 1.0],
+          tileMode: TileMode.clamp),
+        ),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Image.asset("images/splash.jpg"),
+                child: Image.asset("images/welcome.png"),
               ),
               const SizedBox(height: 10,),
               const Padding(
                 padding: EdgeInsets.all(18.0),
                 child: Text(
-                  "Sell Food Online",
+                  "Order Food Online",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 40,
-                    fontFamily: "Signatra",
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontFamily: "Varela",
                     letterSpacing: 3,
                   ),
                 ),
