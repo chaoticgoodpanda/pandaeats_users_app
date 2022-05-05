@@ -3,6 +3,9 @@ import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:pandaeats_users_app/models/sellers.dart';
+import 'package:pandaeats_users_app/widgets/info_design.dart';
 import 'package:pandaeats_users_app/widgets/progress_bar.dart';
 import 'package:pandaeats_users_app/widgets/user_drawer.dart';
 
@@ -132,7 +135,19 @@ class _HomeScreenState extends State<HomeScreen> {
           // ternary to see whether there's data or not to retrieve
           return !snapshot.hasData ?
           SliverToBoxAdapter(child: Center(child: circularProgress(),),) :
-              Sliver
+              SliverStaggeredGrid.countBuilder(
+                  crossAxisCount: 1,
+                  staggeredTileBuilder: (c) => StaggeredTile.fit(1),
+                  itemBuilder: (context, index)
+                  {
+                    Sellers model = Sellers.fromJson(
+                      snapshot.data!.docs[index].data()! as Map<String, dynamic>
+                    );
+                    // design for displaying sellers' restaurants
+                    return InfoDesignWidget(model: model, context: context,);
+                  },
+                  itemCount: snapshot.data!.docs.length
+              );
         },
       ),
     ],
