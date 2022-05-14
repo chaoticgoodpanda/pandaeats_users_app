@@ -163,6 +163,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           "userName": nameController.text.trim(),
           "userAvatarUrl": userImageUrl,
           "status": "Approved",
+          "userCart": ['emptyCart'],
         });
 
     // save data locally
@@ -171,6 +172,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     await sharedPreferences!.setString("email", currentUser.email.toString());
     await sharedPreferences!.setString("name", nameController.text.trim());
     await sharedPreferences!.setString("photoUrl", userImageUrl);
+    // at time of registration cart is empty
+    await sharedPreferences!.setStringList("userCart", ['emptyCart']);
   }
 
   @override

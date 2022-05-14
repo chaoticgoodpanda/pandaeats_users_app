@@ -78,6 +78,9 @@ class _LoginScreenState extends State<LoginScreen> {
             await sharedPreferences!.setString("name", snapshot.data()!["userName"]);
             await sharedPreferences!.setString("photoUrl", snapshot.data()!["userAvatarUrl"]);
 
+            List<String> userCartList = snapshot.data()!["userCart"].cast<String>();
+            await sharedPreferences!.setStringList("userCart", userCartList);
+
             Navigator.pop(context);
             // send the logged in user to the home screen
             Navigator.push(context, MaterialPageRoute(builder: (c) => const HomeScreen()));

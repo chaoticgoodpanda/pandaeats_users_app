@@ -5,7 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:pandaeats_users_app/models/sellers.dart';
-import 'package:pandaeats_users_app/widgets/info_design.dart';
+import 'package:pandaeats_users_app/widgets/sellers_design.dart';
 import 'package:pandaeats_users_app/widgets/progress_bar.dart';
 import 'package:pandaeats_users_app/widgets/user_drawer.dart';
 
@@ -73,8 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
               )
           ),
         ),
-        title: Text(
-          sharedPreferences!.getString("name")!,
+        title: const Text(
+          "PandaEats",
+          style: TextStyle(fontSize: 45, fontFamily: "Signatra"),
         ),
         centerTitle: true,
         automaticallyImplyLeading: true,
@@ -144,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       snapshot.data!.docs[index].data()! as Map<String, dynamic>
                     );
                     // design for displaying sellers' restaurants
-                    return InfoDesignWidget(model: model, context: context,);
+                    return SellersDesignWidget(model: model, context: context,);
                   },
                   itemCount: snapshot.data!.docs.length
               );
