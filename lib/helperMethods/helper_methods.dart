@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pandaeats_users_app/global/global.dart';
+import 'package:pandaeats_users_app/helperMethods/cart_item_counter.dart';
+import 'package:provider/provider.dart';
 
 addItemToCart(String? foodItemId, BuildContext context, int itemCounter)
 {
@@ -19,7 +21,8 @@ addItemToCart(String? foodItemId, BuildContext context, int itemCounter)
     // save this locally as well
     sharedPreferences!.setStringList("userCart", tempList);
 
-    // update the page
+    // update the # of items in the cart
+    Provider.of<CartItemCounter>(context, listen: false).displayCartListItemsNumber();
 
   });
 }
